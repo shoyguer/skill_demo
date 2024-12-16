@@ -36,3 +36,4 @@
 - [ ] My code and changes follow the guidelines of the project.
 - [ ] I have commented my code, particularly in hard-to-understand areas.
 - [ ] My changes generate no new warnings.
+- [ ] I have updated the game version inside the global.gd.
