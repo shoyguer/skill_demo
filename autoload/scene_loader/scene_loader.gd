@@ -9,10 +9,12 @@ var loading: bool = false
 @onready var percentage_label: Label = %PercentageLabel
 
 
+## When this scene is fully loaded (and all it's nodes), this script will run.
 func _ready() -> void:
 	hide()
 
 
+## The code inside this function will run every single game frame.
 func _process(_delta: float) -> void:
 	# If the scene is loading, the code will run
 	if loading == true:
@@ -31,6 +33,7 @@ func _process(_delta: float) -> void:
 			get_tree().change_scene_to_packed(new_scene)
 
 
+## Loads a new scene, according to the scene path, set by the [param new_game_scene].
 func load_scene(new_scene_name: String) -> void:
 	scene_to_load = new_scene_name
 	ResourceLoader.load_threaded_request(scene_to_load)
