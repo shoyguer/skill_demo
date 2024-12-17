@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfulol8recvsv"]
+
+[ext_resource type="PackedScene" uid="uid://x7rnalantd6x" path="res://scenes/game_loop/game_loop.tscn" id="1_sv18k"]
+[ext_resource type="Script" path="res://scenes/game_loop/game_server/game_server.gd" id="2_7bh5g"]
+
+[node name="GameServer" instance=ExtResource("1_sv18k")]
+script = ExtResource("2_7bh5g")

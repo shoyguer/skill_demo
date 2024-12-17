@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dca0bcpjkcic1"]
+
+[ext_resource type="PackedScene" uid="uid://c6lbfwrl8r20j" path="res://ui/hud/chat/chat_line/chat_event.tscn" id="1_twcvf"]
+[ext_resource type="Script" path="res://ui/hud/chat/chat_line/chat_talk.gd" id="2_32nsp"]
+
+[node name="ChatTalk" instance=ExtResource("1_twcvf")]
+theme_override_constants/separation = 16
+script = ExtResource("2_32nsp")
+
+[node name="Label" parent="." index="0"]
+visible = false
+
+[node name="RichText" type="RichTextLabel" parent="." index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 14
+text = "Test: This is a test message to make sure this is working fine."
+fit_content = true
+scroll_active = false

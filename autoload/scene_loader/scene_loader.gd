@@ -34,8 +34,8 @@ func _process(_delta: float) -> void:
 
 
 ## Loads a new scene, according to the scene path, set by the [param new_game_scene].
-func load_scene(new_scene_name: String) -> void:
-	scene_to_load = new_scene_name
+func load_scene(new_scene_path: String) -> void:
+	scene_to_load = new_scene_path
 	ResourceLoader.load_threaded_request(scene_to_load)
 	loading = true
 	show()
