@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://x7rnalantd6x"]
+[gd_scene load_steps=10 format=3 uid="uid://x7rnalantd6x"]
 
 [ext_resource type="Script" path="res://scenes/game_loop/game_loop.gd" id="1_7uprm"]
 [ext_resource type="Texture2D" uid="uid://bhrywne7fw3oa" path="res://assets/map/12288px 256 range.png" id="2_055hg"]
-[ext_resource type="PackedScene" uid="uid://c6lbfwrl8r20j" path="res://ui/hud/chat/chat_line/chat_event.tscn" id="2_f2jua"]
-[ext_resource type="PackedScene" uid="uid://dca0bcpjkcic1" path="res://ui/hud/chat/chat_line/chat_talk.tscn" id="4_6dnxa"]
+[ext_resource type="PackedScene" uid="uid://u5r87npxpnfd" path="res://ui/hud/chat/chat_line/chat_message.tscn" id="4_cxv1v"]
 [ext_resource type="Script" path="res://ui/hud/hud.gd" id="5_o5b6h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0ven"]
@@ -36,9 +35,9 @@ offset = Vector2(640, 360)
 zoom = Vector2(0.5, 0.5)
 
 [node name="HUD" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 script = ExtResource("5_o5b6h")
-chat_event_object = ExtResource("2_f2jua")
-chat_talk_object = ExtResource("4_6dnxa")
+chat_message_object = ExtResource("4_cxv1v")
 
 [node name="Control" type="Control" parent="HUD"]
 layout_mode = 3
