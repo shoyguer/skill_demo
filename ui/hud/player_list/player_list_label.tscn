@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bx67gdr6q7unm"]
+
+[node name="PlayerListLabel" type="Label"]
