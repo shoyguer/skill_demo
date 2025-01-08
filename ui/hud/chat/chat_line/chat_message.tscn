@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://u5r87npxpnfd"]
+
+[ext_resource type="Script" path="res://ui/hud/chat/chat_line/chat_message.gd" id="1_xn2r8"]
+
+[node name="ChatMessage" type="HBoxContainer"]
+custom_minimum_size = Vector2(160, 20)
+size_flags_horizontal = 3
+script = ExtResource("1_xn2r8")
+
+[node name="RichText" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 14
+text = "Test: This is a test message to make sure this is working fine."
+fit_content = true
+scroll_active = false

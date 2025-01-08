@@ -20,7 +20,14 @@ config/icon="res://icon.svg"
 Global="*res://autoload/global.gd"
 Events="*res://autoload/events.gd"
 SceneLoader="*res://autoload/scene_loader/scene_loader.tscn"
+MultiplayerManager="*res://autoload/multiplayer_manager.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
