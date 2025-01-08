@@ -1,6 +1,8 @@
 extends Node
 
 
-signal player_connected(username: String, id: int)
+@warning_ignore("unused_signal")
+signal player_connected(id: int, username: String)
 
-signal player_disconnected(username: String, id: int)
+@warning_ignore("unused_signal")
+signal player_disconnected(id: int, username: String)

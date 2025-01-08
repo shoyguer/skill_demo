@@ -138,7 +138,7 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Host Server"
 button_type = 4
-scene_path_to_load = "res://scenes/game_loop/game_loop.tscn"
+scene_path_to_load = "res://scenes/game_loop/game_server/game_server.tscn"
 
 [node name="ButtonJoinServer" parent="MarginContainer/VBoxContainer/MultiPlayerContainer/MultiPlayerButtons" instance=ExtResource("2_spj15")]
 unique_name_in_owner = true

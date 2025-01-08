@@ -143,7 +143,7 @@ func _fade_container(container: VBoxContainer, type: Fade) -> void:
 ## When [member button_send] is pressed, the username will be saved.
 func _on_username_send_pressed() -> void:
 	if username_line.text != "":
-		MultiplayerManager.user_name = username_line.text
+		MultiplayerManager.username = username_line.text
 		button_host_server.disabled = false
 		button_join_server.disabled = false
 	

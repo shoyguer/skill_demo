@@ -25,6 +25,10 @@ layout_mode = 2
 text = "Players:"
 horizontal_alignment = 1
 
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
 [node name="PlayerListContainer" type="VBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2

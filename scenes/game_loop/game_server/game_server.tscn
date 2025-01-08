@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/game_loop/game_server/game_server.gd" id="2_7bh5g"]
 [ext_resource type="PackedScene" uid="uid://dwdnt4awq07u0" path="res://ui/hud/player_list/player_list.tscn" id="3_hdbng"]
 
-[node name="GameServer" instance=ExtResource("1_sv18k")]
+[node name="GameLoop" instance=ExtResource("1_sv18k")]
 script = ExtResource("2_7bh5g")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control" index="1"]
@@ -14,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 alignment = 2
 
 [node name="PlayerList" parent="HUD/Control/HBoxContainer" index="0" instance=ExtResource("3_hdbng")]
