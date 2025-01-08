@@ -4,6 +4,7 @@ extends Control
 ## It is the first scene loaded when the game is openned.
 
 
+#region Variable Declaration
 enum State {
 	MAIN_MENU,
 	MULTIPLAYER
@@ -31,6 +32,7 @@ var current_container: VBoxContainer = null
 @onready var button_send: Button = %ButtonSend
 # Game data
 @onready var game_version_label: Label = %GameVersionLabel
+#endregion
 
 
 ## When this scene is fully loaded (and all it's nodes), this script will run.

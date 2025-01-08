@@ -1,5 +1,7 @@
 class_name ChatMessage
 extends HBoxContainer
+## This is just a label that will display a message from a player or an event,
+## such as a player connecting or disconnecting from the server.
 
 
 @onready var label: RichTextLabel = $RichText
@@ -15,5 +17,6 @@ func set_event(username: String, event: MultiplayerManager.Event) -> void:
 			label.text = username + " just exited!"
 
 
+## Sets a message from a player.
 func set_message(username: String, message: String) -> void:
 	label.text = username + ": " + message
