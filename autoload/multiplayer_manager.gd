@@ -142,7 +142,7 @@ func _register_player(
 
 ## Runs on client side. [br]
 ## Will emit a signal, after a player connected. 
-## The signal will be used inside the [HUD].
+## The signal will be used inside the [HUD] for showing event messages.
 @rpc("authority", "call_local")
 func _event_player_connected(peer_username: String) -> void:
 	event_happened.emit(peer_username, Event.JOINED)
@@ -150,7 +150,7 @@ func _event_player_connected(peer_username: String) -> void:
 
 ## Runs on client side. [br]
 ## Will emit a signal, after a player disconnected. 
-## The signal will be used inside the [HUD].
+## The signal will be used inside the [HUD] for showing event messages.
 @rpc("authority", "call_local")
 func _event_player_disconnected(peer_username: String) -> void:
 	event_happened.emit(peer_username, Event.EXITED)
@@ -165,6 +165,8 @@ func _update_users_list(updated_users: Dictionary) -> void:
 #endregion
 
 
+## Checks out which players are logged, to make sure the right [PlayerType] is
+## set to the player that just connected.
 func _check_players() -> PlayerType:
 	var caller_id: int = multiplayer.get_remote_sender_id()
 	
