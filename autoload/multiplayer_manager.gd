@@ -104,7 +104,7 @@ func _send_user_data_to_server(new_player_type: PlayerType) -> void:
 func _peer_disconnected(id: int) -> void:
 	if multiplayer.is_server():
 		if users.has(id):
-			var peer_username = users[id]
+			var peer_username = users[id].username
 			Events.player_disconnected.emit(id, peer_username)
 			users.erase(id)
 			
