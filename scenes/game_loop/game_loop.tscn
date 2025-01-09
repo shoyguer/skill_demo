@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://x7rnalantd6x"]
+[gd_scene load_steps=11 format=3 uid="uid://x7rnalantd6x"]
 
 [ext_resource type="Script" path="res://scenes/game_loop/game_loop.gd" id="1_7uprm"]
-[ext_resource type="Texture2D" uid="uid://bhrywne7fw3oa" path="res://assets/map/12288px 256 range.png" id="2_055hg"]
+[ext_resource type="Texture2D" uid="uid://bhrywne7fw3oa" path="res://assets/map/map.png" id="2_055hg"]
 [ext_resource type="PackedScene" uid="uid://u5r87npxpnfd" path="res://ui/hud/chat/chat_line/chat_message.tscn" id="4_cxv1v"]
+[ext_resource type="PackedScene" uid="uid://hproyofcdlyw" path="res://entities/object/base_object.tscn" id="5_7wotx"]
 [ext_resource type="Script" path="res://ui/hud/hud.gd" id="5_o5b6h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0ven"]
@@ -27,7 +28,7 @@ bg_color = Color(0.26956, 0.46, 0.1426, 1)
 script = ExtResource("1_7uprm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1010, 225)
+position = Vector2(750, 225)
 texture = ExtResource("2_055hg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -105,3 +106,9 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_e8y66")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_ryint")
 theme_override_styles/normal = SubResource("StyleBoxFlat_55odj")
 text = "Send"
+
+[node name="Objects" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="BaseObject" parent="Objects" instance=ExtResource("5_7wotx")]
+position = Vector2(640, 360)

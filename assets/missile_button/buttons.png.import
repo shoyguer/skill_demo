@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwg21lnipat65"
-path="res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"
+uid="uid://bb4s1n0qqxac0"
+path="res://.godot/imported/buttons.png-99fa59d05d27b29051384e2d70c43db1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/main_scene_background.jpg"
-dest_files=["res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"]
+source_file="res://assets/missile_button/buttons.png"
+dest_files=["res://.godot/imported/buttons.png-99fa59d05d27b29051384e2d70c43db1.ctex"]
 
 [params]
 

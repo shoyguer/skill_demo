@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwg21lnipat65"
-path="res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"
+uid="uid://qa1aqbcl7t6y"
+path="res://.godot/imported/unk_air.png-1a818b50a6be346308b6076e03d5d851.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/main_scene_background.jpg"
-dest_files=["res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"]
+source_file="res://assets/ntds_symbols/unk_air.png"
+dest_files=["res://.godot/imported/unk_air.png-1a818b50a6be346308b6076e03d5d851.ctex"]
 
 [params]
 

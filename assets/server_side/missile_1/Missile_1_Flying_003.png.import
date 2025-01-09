@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwg21lnipat65"
-path="res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"
+uid="uid://ivwr8fnstd2g"
+path="res://.godot/imported/Missile_1_Flying_003.png-107e87d5415ba92237b98f1c32b4b8f3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/main_scene_background.jpg"
-dest_files=["res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"]
+source_file="res://assets/server_side/missile_1/Missile_1_Flying_003.png"
+dest_files=["res://.godot/imported/Missile_1_Flying_003.png-107e87d5415ba92237b98f1c32b4b8f3.ctex"]
 
 [params]
 

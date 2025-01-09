@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwg21lnipat65"
-path="res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"
+uid="uid://bjenwnnngwrj1"
+path="res://.godot/imported/Red_Air_Craft.png-0001a44691a794f22240a7bcacfc7cdd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/main_scene_background.jpg"
-dest_files=["res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"]
+source_file="res://assets/server_side/planes/Red_Air_Craft.png"
+dest_files=["res://.godot/imported/Red_Air_Craft.png-0001a44691a794f22240a7bcacfc7cdd.ctex"]
 
 [params]
 

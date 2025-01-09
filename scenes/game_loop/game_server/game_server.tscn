@@ -6,6 +6,9 @@
 
 [node name="GameLoop" instance=ExtResource("1_sv18k")]
 script = ExtResource("2_7bh5g")
+zoom_modifier = Vector2(0.05, 0.05)
+zoom_min = Vector2(0.2, 0.2)
+zoom_max = Vector2(1, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control" index="1"]
 layout_mode = 1

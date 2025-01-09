@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwg21lnipat65"
-path="res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"
+uid="uid://gn0scpqvc0r5"
+path="res://.godot/imported/friend_air.png-4376cbc25202f47bc7cc2341cac95ec9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/main_scene_background.jpg"
-dest_files=["res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"]
+source_file="res://assets/ntds_symbols/friend_air.png"
+dest_files=["res://.godot/imported/friend_air.png-4376cbc25202f47bc7cc2341cac95ec9.ctex"]
 
 [params]
 

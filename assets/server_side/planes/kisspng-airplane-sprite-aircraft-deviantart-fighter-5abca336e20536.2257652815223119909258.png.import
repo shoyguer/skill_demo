@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwg21lnipat65"
-path="res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"
+uid="uid://cor8q1jqr2pcv"
+path="res://.godot/imported/kisspng-airplane-sprite-aircraft-deviantart-fighter-5abca336e20536.2257652815223119909258.png-6df718a6be2802f75d1e61bd37a0e19d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/main_scene_background.jpg"
-dest_files=["res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"]
+source_file="res://assets/server_side/planes/kisspng-airplane-sprite-aircraft-deviantart-fighter-5abca336e20536.2257652815223119909258.png"
+dest_files=["res://.godot/imported/kisspng-airplane-sprite-aircraft-deviantart-fighter-5abca336e20536.2257652815223119909258.png-6df718a6be2802f75d1e61bd37a0e19d.ctex"]
 
 [params]
 

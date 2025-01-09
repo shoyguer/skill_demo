@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://hproyofcdlyw"]
+
+[ext_resource type="Script" path="res://entities/object/base_object.gd" id="1_wxilh"]
+[ext_resource type="Texture2D" uid="uid://dw2m0ej5v37c1" path="res://assets/ntds_symbols/own_ship.png" id="2_j0chr"]
+[ext_resource type="Texture2D" uid="uid://cht5d2xgl8fd8" path="res://assets/server_side/player_ship/ship.png" id="2_v3rld"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0r2g"]
+size = Vector2(48, 192)
+
+[node name="BaseObject" type="StaticBody2D"]
+script = ExtResource("1_wxilh")
+ntds_texture = ExtResource("2_j0chr")
+server_texture = ExtResource("2_v3rld")
+server_scale = Vector2(0.33, 0.33)
+is_server_side = false
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+scale = Vector2(0.33, 0.33)
+shape = SubResource("RectangleShape2D_g0r2g")
+disabled = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_j0chr")

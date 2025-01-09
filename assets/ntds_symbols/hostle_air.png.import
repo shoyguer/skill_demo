@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwg21lnipat65"
-path="res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"
+uid="uid://c87el6w2fonr8"
+path="res://.godot/imported/hostle_air.png-661c7cbdae3dd79e2470127d94588865.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/main_scene_background.jpg"
-dest_files=["res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"]
+source_file="res://assets/ntds_symbols/hostle_air.png"
+dest_files=["res://.godot/imported/hostle_air.png-661c7cbdae3dd79e2470127d94588865.ctex"]
 
 [params]
 

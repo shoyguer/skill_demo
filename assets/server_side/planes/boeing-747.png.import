@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwg21lnipat65"
-path="res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"
+uid="uid://dvww8341ic8x7"
+path="res://.godot/imported/boeing-747.png-cba4fb05430a526a3024ea933db50dc0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/main_scene_background.jpg"
-dest_files=["res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"]
+source_file="res://assets/server_side/planes/boeing-747.png"
+dest_files=["res://.godot/imported/boeing-747.png-cba4fb05430a526a3024ea933db50dc0.ctex"]
 
 [params]
 

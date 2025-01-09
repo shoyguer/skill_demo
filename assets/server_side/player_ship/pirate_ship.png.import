@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwg21lnipat65"
-path="res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"
+uid="uid://bqx2gkvu87wv0"
+path="res://.godot/imported/pirate_ship.png-99f1310292236acf65d5bd84d1537229.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/main_scene_background.jpg"
-dest_files=["res://.godot/imported/main_scene_background.jpg-faacd0809d9a17c6a64283d8203970d4.ctex"]
+source_file="res://assets/server_side/player_ship/pirate_ship.png"
+dest_files=["res://.godot/imported/pirate_ship.png-99f1310292236acf65d5bd84d1537229.ctex"]
 
 [params]
 
