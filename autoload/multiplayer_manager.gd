@@ -38,6 +38,9 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(_connection_failed)
 
 
+## Runs on client side. [br]
+## If the connection has failed, due to server being full, this signal will be
+## emited, this will pop-up an error to the player inside the [MainMenu].
 func _connection_failed() -> void:
 	Events.warned_server_full.emit()
 
