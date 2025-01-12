@@ -7,6 +7,15 @@ extends GameLoop
 ## units to the game.
 
 
+@export_group("Server Settings")
+@export var enemy_number: int = 10
+@export var aircraft_scene: PackedScene
+@export var aircraft_spawn_offset: float = 200.0
+@export var aircraft_elevation_range: Vector2 = Vector2(1000, 5000)
+
+@export var is_server_view: bool = true
+
+@export_group("Camera Zoom")
 ## By how much the zoom will be modified
 @export var zoom_modifier: Vector2 = Vector2(0.05, 0.05)
 ## The minimum value the zoom can assume. [br]
@@ -17,16 +26,25 @@ extends GameLoop
 @export var zoom_max: Vector2 = Vector2(1.0, 1.0)
 
 @onready var player_list: PlayerList = %PlayerList
-@onready var camera: Camera2D = $Camera2D
+
+@onready var option_damage: OptionFloatContainer = %OptionDamage
+@onready var option_ntds: OptionCheckContainer = %OptionNTDS
+@onready var option_spawn: OptionButtonContainer = %OptionSpawn
+
 
 
 func _ready() -> void:
+	randomize()
 	is_server_side = true
 	super()
 	
 	var server_name: String = MultiplayerManager.users[1]
 	
 	player_list.add_to_player_list(1, server_name, MultiplayerManager.PlayerType.HOST)
+	
+	option_damage.float_changed.connect(_damage_multiplier_changed)
+	option_ntds.button_toggled.connect(_change_object_view)
+	option_spawn.button_pressed.connect(_spawn_enemies)
 
 
 func _input(event: InputEvent) -> void:
@@ -39,3 +57,45 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == 4:
 			camera.zoom += zoom_modifier
 			camera.zoom = clamp(camera.zoom, zoom_min, zoom_max)
+
+
+func _damage_multiplier_changed(value: float) -> void:
+	damage_multiplier = value
+
+
+func _change_object_view(value: bool) -> void:
+	is_server_view = value
+	for object: BaseObject in objects.get_children():
+		object.is_server_side = is_server_view
+
+
+func _spawn_enemies() -> void:
+	for number: int in enemy_number:
+		var aircraft: ObjectAircraft = aircraft_scene.instantiate()
+		objects.add_child(aircraft)
+		
+		# Randomizing x and y for aircraft position
+		var x_position: float = randf_range(-aircraft_spawn_offset, aircraft_spawn_offset)
+		# Will center the x position on the ship
+		x_position = ship.position.x + x_position
+		var y_position: float = randf_range(-aircraft_spawn_offset, aircraft_spawn_offset)
+		# Will center the y position on the ship
+		y_position = ship.position.y + y_position
+		var aircraft_position: Vector2 = Vector2(x_position, y_position)
+		# setting aircraft position
+		aircraft.position = aircraft_position
+		aircraft.init(ship, aircraft_spawn_offset)
+		
+		# Generates elevation
+		var aircraft_elevation: float = randf_range(
+			aircraft_elevation_range.x, aircraft_elevation_range.y)
+		
+		aircraft.elevation = aircraft_elevation
+		
+		aircraft.is_server_side = is_server_view
+
+
+@rpc("authority", "call_remote")
+func _spawn_aicraft_client() -> void:
+	var aircraft: ObjectAircraft = aircraft_scene.instantiate()
+	objects.add_child(aircraft)

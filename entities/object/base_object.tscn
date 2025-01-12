@@ -1,24 +1,80 @@
-[gd_scene load_steps=5 format=3 uid="uid://hproyofcdlyw"]
+[gd_scene load_steps=7 format=3 uid="uid://hproyofcdlyw"]
 
 [ext_resource type="Script" path="res://entities/object/base_object.gd" id="1_wxilh"]
 [ext_resource type="Texture2D" uid="uid://dw2m0ej5v37c1" path="res://assets/ntds_symbols/own_ship.png" id="2_j0chr"]
 [ext_resource type="Texture2D" uid="uid://cht5d2xgl8fd8" path="res://assets/server_side/player_ship/ship.png" id="2_v3rld"]
+[ext_resource type="Texture2D" uid="uid://qa1aqbcl7t6y" path="res://assets/ntds_symbols/unk_air.png" id="3_p0o5e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0r2g"]
-size = Vector2(48, 192)
+resource_local_to_scene = true
+size = Vector2(16, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yojx8"]
+resource_local_to_scene = true
+size = Vector2(24, 64)
 
 [node name="BaseObject" type="StaticBody2D"]
 script = ExtResource("1_wxilh")
+current_hit_points = 10
 ntds_texture = ExtResource("2_j0chr")
+ntds_unknown_texture = ExtResource("3_p0o5e")
 server_texture = ExtResource("2_v3rld")
 server_scale = Vector2(0.33, 0.33)
-is_server_side = false
+collision_shape_size = Vector2(16, 60)
+area_collision_shape_size = Vector2(24, 64)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-scale = Vector2(0.33, 0.33)
 shape = SubResource("RectangleShape2D_g0r2g")
 disabled = true
 debug_color = Color(0, 0.595, 0.7, 0)
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_j0chr")
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("2_v3rld")
+
+[node name="NTDS" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("2_v3rld")
+
+[node name="NTDSUnknown" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("2_v3rld")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AreaCollision" type="CollisionShape2D" parent="Area2D"]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_yojx8")
+
+[node name="HUD" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="LabelHP" type="Label" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 30.0
+offset_right = 40.0
+offset_bottom = 53.0
+pivot_offset = Vector2(0, 23)
+text = "10"
+
+[node name="LabelTag" type="Label" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = -54.0
+offset_right = 57.0
+offset_bottom = -31.0
+pivot_offset = Vector2(0, 23)
+theme_override_colors/font_color = Color(0.89, 0.867453, 0.2136, 1)
+text = "OBJECT"
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_mouse_exited"]

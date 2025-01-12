@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://qv1lbodrkhxu"]
+
+[ext_resource type="PackedScene" uid="uid://hproyofcdlyw" path="res://entities/object/base_object.tscn" id="1_v5cv0"]
+[ext_resource type="Script" path="res://entities/object/ship/object_ship.gd" id="2_ltf5p"]
+[ext_resource type="Texture2D" uid="uid://qa1aqbcl7t6y" path="res://assets/ntds_symbols/unk_air.png" id="3_6brp3"]
+[ext_resource type="Texture2D" uid="uid://dw2m0ej5v37c1" path="res://assets/ntds_symbols/own_ship.png" id="3_dxgdh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m178u"]
+resource_local_to_scene = true
+size = Vector2(16, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjgvd"]
+resource_local_to_scene = true
+size = Vector2(24, 64)
+
+[node name="Ship" instance=ExtResource("1_v5cv0")]
+script = ExtResource("2_ltf5p")
+object_speed = 0.0
+is_unknown = false
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource("RectangleShape2D_m178u")
+
+[node name="NTDS" parent="." index="2"]
+scale = Vector2(1, 1)
+texture = ExtResource("3_dxgdh")
+
+[node name="NTDSUnknown" parent="." index="3"]
+scale = Vector2(1, 1)
+texture = ExtResource("3_6brp3")
+
+[node name="AreaCollision" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_vjgvd")

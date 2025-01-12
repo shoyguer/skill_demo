@@ -1,14 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfulol8recvsv"]
+[gd_scene load_steps=9 format=3 uid="uid://dfulol8recvsv"]
 
 [ext_resource type="PackedScene" uid="uid://x7rnalantd6x" path="res://scenes/game_loop/game_loop.tscn" id="1_sv18k"]
 [ext_resource type="Script" path="res://scenes/game_loop/game_server/game_server.gd" id="2_7bh5g"]
 [ext_resource type="PackedScene" uid="uid://dwdnt4awq07u0" path="res://ui/hud/player_list/player_list.tscn" id="3_hdbng"]
+[ext_resource type="PackedScene" uid="uid://bxx3lgwby20lj" path="res://entities/object/aircraft/object_aircraft.tscn" id="3_lw8kg"]
+[ext_resource type="PackedScene" uid="uid://cb17up6ufs00s" path="res://ui/hud/components/option_float.tscn" id="4_01cqy"]
+[ext_resource type="StyleBox" uid="uid://ct18hpkw1qno1" path="res://ui/hud/style_box_styles/sbf_background.tres" id="4_op5cl"]
+[ext_resource type="PackedScene" uid="uid://cm7skdt86usyd" path="res://ui/hud/components/option_check.tscn" id="5_km1g4"]
+[ext_resource type="PackedScene" uid="uid://cuuqoh4fpck2i" path="res://ui/hud/components/option_button.tscn" id="6_8jeu1"]
 
 [node name="GameLoop" instance=ExtResource("1_sv18k")]
 script = ExtResource("2_7bh5g")
+enemy_number = 10
+aircraft_scene = ExtResource("3_lw8kg")
+aircraft_spawn_offset = 650.0
+aircraft_elevation_range = Vector2(1000, 5000)
+is_server_view = true
 zoom_modifier = Vector2(0.05, 0.05)
 zoom_min = Vector2(0.2, 0.2)
-zoom_max = Vector2(1, 1)
+zoom_max = Vector2(2, 2)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control" index="1"]
 layout_mode = 1
@@ -18,8 +28,49 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-alignment = 2
 
-[node name="PlayerList" parent="HUD/Control/HBoxContainer" index="0" instance=ExtResource("3_hdbng")]
+[node name="ServerSettings" type="PanelContainer" parent="HUD/Control/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(312, 256)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = ExtResource("4_op5cl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/HBoxContainer/ServerSettings" index="0"]
+layout_mode = 2
+
+[node name="Players" type="Label" parent="HUD/Control/HBoxContainer/ServerSettings/VBoxContainer" index="0"]
+layout_mode = 2
+text = "Server Settings"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HUD/Control/HBoxContainer/ServerSettings/VBoxContainer" index="1"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ServerSettingsContainer" type="VBoxContainer" parent="HUD/Control/HBoxContainer/ServerSettings/VBoxContainer" index="2"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="OptionDamage" parent="HUD/Control/HBoxContainer/ServerSettings/VBoxContainer/ServerSettingsContainer" index="0" instance=ExtResource("4_01cqy")]
+unique_name_in_owner = true
+layout_mode = 2
+label_title = "Damage Multiplier"
+
+[node name="OptionNTDS" parent="HUD/Control/HBoxContainer/ServerSettings/VBoxContainer/ServerSettingsContainer" index="1" instance=ExtResource("5_km1g4")]
+unique_name_in_owner = true
+layout_mode = 2
+label_title = "Is Server View"
+check_value = true
+
+[node name="OptionSpawn" parent="HUD/Control/HBoxContainer/ServerSettings/VBoxContainer/ServerSettingsContainer" index="2" instance=ExtResource("6_8jeu1")]
+unique_name_in_owner = true
+layout_mode = 2
+label_title = "Spawn Enemies"
+
+[node name="PlayerList" parent="HUD/Control/HBoxContainer" index="1" instance=ExtResource("3_hdbng")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_styles/panel = ExtResource("4_op5cl")

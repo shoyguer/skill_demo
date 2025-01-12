@@ -8,3 +8,5 @@ func _ready() -> void:
 	
 	super()
 	
+	ship.is_server_side = false
+	ship.is_unknown = false
