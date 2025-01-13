@@ -94,5 +94,6 @@ func _spawn_enemies() -> void:
 		aircraft.type = BaseObject.Type.UNIDENTIFIED
 		
 		aircraft.is_server_side = is_server_view
+		aircraft.leaves_trail = true
 		
 		aircraft.object_destroyed.connect(_object_destroyed)

@@ -47,12 +47,14 @@ enum Type {
 			and show_hud
 		):
 			hud.show()
+			trail_container.show()
 		
 		if (
 			hud is Control
 			and not show_hud
 		):
 			hud.hide()
+			trail_container.hide()
 	get:
 		return show_hud
 @export var type: Type = Type.UNIDENTIFIED:
@@ -222,6 +224,36 @@ enum Type {
 	get:
 		return area_collision_shape_size
 
+
+@export_group("Trail")
+@export var trail_scene: PackedScene
+@export var leaves_trail: bool = false:
+	set(value):
+		leaves_trail = value
+		
+		if timer_trail is Timer:
+			if leaves_trail:
+				_on_timer_trail_timeout()
+			else:
+				timer_trail.stop()
+			
+	get:
+		return leaves_trail
+@export var trail_create_time: float = 5:
+	set(value):
+		trail_create_time = value
+	get:
+		return trail_create_time
+@export var erase_trail: bool = false:
+	set(value):
+		erase_trail = value
+		
+		if erase_trail:
+			for child: Sprite2D in trail_container.get_children():
+				child.queue_free()
+			
+			erase_trail = false
+
 var ntds_array: Array[Sprite2D] = []
 
 #region Onready vars
@@ -237,6 +269,9 @@ var ntds_array: Array[Sprite2D] = []
 @onready var ntds_friend: Sprite2D = $NTDSFriend
 @onready var ntds_hostile: Sprite2D = $NTDSHostile
 @onready var ntds_unidentified: Sprite2D = $NTDSUnidentified
+
+@onready var trail_container: Node2D = %TrailContainer
+@onready var timer_trail: Timer = %TimerTrail
 #endregion
 #endregion
 
@@ -319,3 +354,13 @@ func _update_server(data: Dictionary) -> void:
 @rpc("authority", "call_remote")
 func _update_object() -> void:
 	object_updated.emit(self)
+
+
+func _on_timer_trail_timeout() -> void:
+	var trail_instance: Sprite2D = trail_scene.instantiate()
+	trail_container.add_child(trail_instance)
+	trail_instance.top_level = true
+	trail_instance.global_position = global_position
+	
+	timer_trail.wait_time = trail_create_time
+	timer_trail.start()

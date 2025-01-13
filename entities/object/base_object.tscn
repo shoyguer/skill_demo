@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://hproyofcdlyw"]
+[gd_scene load_steps=6 format=3 uid="uid://hproyofcdlyw"]
 
 [ext_resource type="Script" path="res://entities/object/base_object.gd" id="1_wxilh"]
 [ext_resource type="Texture2D" uid="uid://cht5d2xgl8fd8" path="res://assets/server_side/player_ship/ship.png" id="2_v3rld"]
+[ext_resource type="PackedScene" uid="uid://1ooprk5eldsm" path="res://entities/object/trail/trail_instance.tscn" id="3_tlxpe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0r2g"]
 resource_local_to_scene = true
@@ -14,12 +15,11 @@ size = Vector2(24, 64)
 [node name="BaseObject" type="StaticBody2D"]
 script = ExtResource("1_wxilh")
 current_hit_points = 10
-can_change_type = null
-altitude = null
 server_texture = ExtResource("2_v3rld")
 server_scale = Vector2(0.33, 0.33)
 collision_shape_size = Vector2(16, 60)
 area_collision_shape_size = Vector2(24, 64)
+trail_scene = ExtResource("3_tlxpe")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g0r2g")
@@ -83,8 +83,13 @@ pivot_offset = Vector2(0, 23)
 theme_override_colors/font_color = Color(0.89, 0.867453, 0.2136, 1)
 text = "NOTAG"
 
-[node name="Trail" type="Node2D" parent="."]
+[node name="TrailContainer" type="Node2D" parent="."]
 unique_name_in_owner = true
+
+[node name="TimerTrail" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_mouse_exited"]
+[connection signal="timeout" from="TimerTrail" to="." method="_on_timer_trail_timeout"]

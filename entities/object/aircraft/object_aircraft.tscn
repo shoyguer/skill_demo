@@ -42,6 +42,12 @@ properties/8/replication_mode = 2
 properties/9/path = NodePath(".:altitude")
 properties/9/spawn = true
 properties/9/replication_mode = 2
+properties/10/path = NodePath(".:leaves_trail")
+properties/10/spawn = true
+properties/10/replication_mode = 2
+properties/11/path = NodePath(".:trail_create_time")
+properties/11/spawn = true
+properties/11/replication_mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h4gwi"]
 resource_local_to_scene = true
@@ -51,8 +57,6 @@ size = Vector2(32, 32)
 script = ExtResource("2_mlbg1")
 object_speed = 5.0
 can_be_interacted = true
-can_change_type = true
-altitude = 0.0
 ntds_friend_texture = ExtResource("3_rgh7e")
 ntds_unidentified_texture = ExtResource("5_u78hq")
 ntds_hostile_texture = ExtResource("3_762bw")
@@ -87,3 +91,6 @@ offset = Vector2(0, 12)
 
 [node name="AreaCollision" parent="Area2D" index="0"]
 shape = SubResource("RectangleShape2D_h4gwi")
+
+[node name="TrailContainer" parent="." index="8"]
+visible = false

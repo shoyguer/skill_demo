@@ -86,6 +86,9 @@ func _shoot_missile(type: ObjectMissile.MissileType, object_name: String) -> voi
 			
 			missile.is_server_side = is_server_side
 			
+			missile.leaves_trail = true
+			missile.trail_create_time = 3
+			
 			missile.init(object)
 			
 			break

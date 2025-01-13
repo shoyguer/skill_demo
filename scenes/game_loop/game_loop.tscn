@@ -149,8 +149,10 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 position = Vector2(640, 360)
 type = 1
-can_change_type = true
-altitude = 0.0
+trail_scene = null
+leaves_trail = null
+trail_create_time = null
+erase_trail = null
 
 [node name="Camera" type="Camera2D" parent="Objects/Ship"]
 unique_name_in_owner = true

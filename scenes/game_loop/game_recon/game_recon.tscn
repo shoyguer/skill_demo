@@ -93,5 +93,9 @@ horizontal_alignment = 1
 
 [node name="Ship" parent="Objects" index="0"]
 altitude = 0
+trail_scene = null
+leaves_trail = null
+trail_create_time = null
+erase_trail = null
 
 [connection signal="pressed" from="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer/ButtonSave" to="." method="_on_button_save_pressed"]

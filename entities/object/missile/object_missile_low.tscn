@@ -29,6 +29,12 @@ properties/3/replication_mode = 1
 properties/4/path = NodePath(".:altitude")
 properties/4/spawn = true
 properties/4/replication_mode = 1
+properties/5/path = NodePath(".:leaves_trail")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:trail_create_time")
+properties/6/spawn = true
+properties/6/replication_mode = 1
 
 [node name="BaseObject" instance=ExtResource("1_s0wa2")]
 script = ExtResource("2_bufrd")
@@ -40,7 +46,6 @@ object_speed = 15.0
 can_be_interacted = true
 type = 1
 can_change_type = false
-altitude = 0.0
 ntds_friend_texture = ExtResource("3_2oxv3")
 server_texture = ExtResource("4_fl8xj")
 server_scale = Vector2(0.1, 0.1)
@@ -65,5 +70,8 @@ text = "MISSILE"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="7"]
 replication_config = SubResource("SceneReplicationConfig_nuo2o")
+
+[node name="TrailContainer" parent="." index="8"]
+visible = false
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_area_entered"]
