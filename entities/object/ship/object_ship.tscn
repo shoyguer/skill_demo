@@ -15,20 +15,17 @@ size = Vector2(24, 64)
 [node name="Ship" instance=ExtResource("1_v5cv0")]
 script = ExtResource("2_ltf5p")
 object_speed = 0.0
+type = 1
 ntds_friend_texture = ExtResource("3_dxgdh")
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("RectangleShape2D_m178u")
 
 [node name="NTDSFriend" parent="." index="2"]
-scale = Vector2(1, 1)
 texture = ExtResource("3_dxgdh")
-
-[node name="NTDSHostile" parent="." index="3"]
-scale = Vector2(1, 1)
-
-[node name="NTDSUnidentified" parent="." index="4"]
-scale = Vector2(1, 1)
 
 [node name="AreaCollision" parent="Area2D" index="0"]
 shape = SubResource("RectangleShape2D_vjgvd")
+
+[node name="TrailContainer" parent="." index="7"]
+visible = false

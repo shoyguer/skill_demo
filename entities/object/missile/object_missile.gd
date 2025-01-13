@@ -46,7 +46,7 @@ func _target_destroyed() -> void:
 
 
 func _on_area_area_entered(area: Area2D) -> void:
-	if is_server_side:
+	if multiplayer.is_server():
 		if area.get_parent() == target:
 			target.get_hit(damage_points)
 			self.queue_free()
