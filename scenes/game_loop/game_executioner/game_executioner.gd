@@ -103,13 +103,6 @@ func _add_object_to_interface() -> void:
 	if not current_object.can_change_type:
 		option_enum_container.editable = false
 	
-	if current_object.type == BaseObject.Type.FRIEND:
-		button_shoot_low.disabled = true
-		button_shoot_high.disabled = true
-	else:
-		button_shoot_low.disabled = false
-		button_shoot_high.disabled = false
-	
 	call_deferred("_check_target_altitude")
 	
 	option_label_container.line_value = current_object.tag
@@ -124,6 +117,10 @@ func _check_target_altitude() -> void:
 	else:
 		button_shoot_high.disabled = true
 		button_shoot_low.disabled = false
+	
+	if current_object.type == BaseObject.Type.FRIEND:
+		button_shoot_low.disabled = true
+		button_shoot_high.disabled = true
 
 
 func _show_recon_setup(type: bool) -> void:

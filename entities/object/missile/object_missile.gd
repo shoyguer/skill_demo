@@ -37,6 +37,7 @@ func init(new_target: BaseObject) -> void:
 
 
 func _target_updated() -> void:
+	print("test?")
 	if target.type == BaseObject.Type.FRIEND:
 		queue_free()
 
