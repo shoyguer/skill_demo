@@ -10,7 +10,7 @@ extends GameLoop
 @export_group("Server Settings")
 @export var enemy_number: int = 10
 @export var aircraft_spawn_offset: float = 200.0
-@export var aircraft_elevation_range: Vector2 = Vector2(1000, 5000)
+@export var aircraft_altitude_range: Vector2 = Vector2(6000, 20000)
 
 @export var is_server_view: bool = true
 
@@ -86,11 +86,11 @@ func _spawn_enemies() -> void:
 		aircraft.position = aircraft_position
 		aircraft.init(ship, aircraft_spawn_offset)
 		
-		# Generates elevation
-		var aircraft_elevation: float = randf_range(
-			aircraft_elevation_range.x, aircraft_elevation_range.y)
+		# Generates altitude
+		var aircraft_altitude: float = randf_range(
+			aircraft_altitude_range.x, aircraft_altitude_range.y)
 		
-		aircraft.elevation = aircraft_elevation
+		aircraft.altitude = aircraft_altitude
 		aircraft.type = BaseObject.Type.UNIDENTIFIED
 		
 		aircraft.is_server_side = is_server_view

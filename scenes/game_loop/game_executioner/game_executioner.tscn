@@ -96,15 +96,30 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "SAVE DATA"
 
-[node name="ButtonShoot" type="Button" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer" index="4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer" index="4"]
+layout_mode = 2
+
+[node name="ButtonShootLow" type="Button" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer/HBoxContainer" index="0"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 14
 theme_override_styles/disabled = SubResource("StyleBoxFlat_4k86a")
 theme_override_styles/hover = ExtResource("4_p7fky")
 theme_override_styles/pressed = ExtResource("5_7vysq")
 theme_override_styles/normal = ExtResource("6_n2eto")
-text = "SHOOT"
+text = "SHOOT LOW"
+
+[node name="ButtonShootHigh" type="Button" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer/HBoxContainer" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+theme_override_styles/disabled = SubResource("StyleBoxFlat_4k86a")
+theme_override_styles/hover = ExtResource("4_p7fky")
+theme_override_styles/pressed = ExtResource("5_7vysq")
+theme_override_styles/normal = ExtResource("6_n2eto")
+text = "SHOOT HIGH"
 
 [node name="LabelNoFound" type="Label" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer" index="3"]
 unique_name_in_owner = true
@@ -113,11 +128,6 @@ layout_mode = 2
 text = "No Enemy Found"
 horizontal_alignment = 1
 
-[node name="Ship" parent="Objects" index="0"]
-can_change_type = true
-
-[node name="Timer" type="Timer" parent="." index="4"]
-unique_name_in_owner = true
-
 [connection signal="pressed" from="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer/ButtonSave" to="." method="_on_button_save_pressed"]
-[connection signal="pressed" from="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer/ButtonShoot" to="." method="_on_button_shoot_pressed"]
+[connection signal="pressed" from="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer/HBoxContainer/ButtonShootLow" to="." method="_on_button_shoot_low_pressed"]
+[connection signal="pressed" from="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer/HBoxContainer/ButtonShootHigh" to="." method="_on_button_shoot_high_pressed"]

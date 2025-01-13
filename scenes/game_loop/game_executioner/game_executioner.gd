@@ -16,8 +16,9 @@ var current_object: BaseObject = null
 
 @onready var button_back: Button = %ButtonBack
 @onready var button_next: Button = %ButtonNext
-@onready var button_shoot: Button = %ButtonShoot
-@onready var timer: Timer = %Timer
+
+@onready var button_shoot_low: Button = %ButtonShootLow
+@onready var button_shoot_high: Button = %ButtonShootHigh
 
 
 # Called when the node enters the scene tree for the first time.
@@ -103,12 +104,26 @@ func _add_object_to_interface() -> void:
 		option_enum_container.editable = false
 	
 	if current_object.type == BaseObject.Type.FRIEND:
-		button_shoot.disabled = true
+		button_shoot_low.disabled = true
+		button_shoot_high.disabled = true
 	else:
-		button_shoot.disabled = false
+		button_shoot_low.disabled = false
+		button_shoot_high.disabled = false
+	
+	call_deferred("_check_target_altitude")
 	
 	option_label_container.line_value = current_object.tag
 	option_enum_container.line_value = current_object.type
+
+
+func _check_target_altitude() -> void:
+	if current_object.altitude >= 10000:
+		button_shoot_high.disabled = false
+		button_shoot_low.disabled = true
+	
+	else:
+		button_shoot_high.disabled = true
+		button_shoot_low.disabled = false
 
 
 func _show_recon_setup(type: bool) -> void:
@@ -128,16 +143,16 @@ func _remove_object_from_interface(object: BaseObject) -> void:
 			object_data_container.hide()
 
 
-## Shoots a target
-func _on_button_shoot_pressed() -> void:
-	rpc_id(1, "_shoot_missile", current_object.name)
-	
-	if current_object != null:
-		if current_object.type != BaseObject.Type.FRIEND:
-			button_shoot.disabled = false
-	
-	timer.wait_time = SHOOT_WAIT_TIME
-	timer.start()
+## Shoots a target using the low missile
+func _on_button_shoot_low_pressed() -> void:
+	var missile_type: ObjectMissile.MissileType = ObjectMissile.MissileType.LOW
+	rpc_id(1, "_shoot_missile", missile_type, current_object.name)
+
+
+## Shoots a target using the high missile
+func _on_button_shoot_high_pressed() -> void:
+	var missile_type: ObjectMissile.MissileType  = ObjectMissile.MissileType.HIGH
+	rpc_id(1, "_shoot_missile", missile_type, current_object.name)
 
 
 func _on_button_save_pressed() -> void:

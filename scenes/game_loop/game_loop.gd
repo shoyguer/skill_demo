@@ -16,7 +16,8 @@ signal object_removed(object: BaseObject)
 		return score_points
 
 @export var aircraft_scene: PackedScene
-@export var missile_scene: PackedScene
+@export var missile_low_scene: PackedScene
+@export var missile_high_scene: PackedScene
 
 var is_server_side: bool = true
 var interactable_objects: Array[BaseObject] = []
@@ -62,10 +63,18 @@ func _on_object_spawner_despawned(node: Node) -> void:
 
 
 @rpc("any_peer", "call_remote")
-func _shoot_missile(object_name: String) -> void:
+func _shoot_missile(type: ObjectMissile.MissileType, object_name: String) -> void:
 	for object: BaseObject in objects.get_children():
 		if object.name == object_name:
-			var missile: ObjectMissile = missile_scene.instantiate()
+			
+			var missile: ObjectMissile
+			
+			match type:
+				ObjectMissile.MissileType.LOW:
+					missile = missile_low_scene.instantiate()
+				
+				ObjectMissile.MissileType.HIGH:
+					missile = missile_high_scene.instantiate()
 			
 			var randi_var: int = randi_range(1, 16000)
 			

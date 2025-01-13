@@ -12,7 +12,7 @@
 script = ExtResource("2_7bh5g")
 enemy_number = 10
 aircraft_spawn_offset = 650.0
-aircraft_elevation_range = Vector2(1000, 5000)
+aircraft_altitude_range = Vector2(6000, 20000)
 is_server_view = true
 zoom_modifier = Vector2(0.05, 0.05)
 zoom_min = Vector2(0.2, 0.2)
@@ -72,6 +72,3 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_styles/panel = ExtResource("4_op5cl")
-
-[node name="Ship" parent="Objects" index="0"]
-can_change_type = true

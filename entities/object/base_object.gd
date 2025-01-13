@@ -13,6 +13,7 @@ enum Type {
 	HOSTILE
 }
 
+#region Object Properties Group
 @export_group("Object Properties")
 @export var tag: String = "NOTAG":
 	set(value):
@@ -74,9 +75,18 @@ enum Type {
 		return type
 @export var can_change_type: bool = true
 
-## The elevation of the object
-@export var elevation: float = 0
+## The altitude of the object
+@export var altitude: float = 0:
+	set(value):
+		altitude = value
+		
+		if label_altitude is Label:
+			label_altitude.text = "ALT: " + str(int(altitude))
+	get:
+		return altitude
+#endregion
 
+#region Visual Group
 @export_group("Visual")
 @export_subgroup("NTDS")
 @export var ntds_friend_texture: Texture:
@@ -142,6 +152,7 @@ enum Type {
 		
 	get:
 		return ntds_scale
+#endregion
 
 @export_subgroup("Server")
 @export var server_texture: Texture:
@@ -219,6 +230,7 @@ var ntds_array: Array[Sprite2D] = []
 @onready var sprite: Sprite2D = $Sprite
 @onready var label_hp: Label = %LabelHP
 @onready var label_tag: Label = %LabelTag
+@onready var label_altitude: Label = %LabelAltitude
 @onready var hud: Control = %HUD
 
 # NTDS sprites

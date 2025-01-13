@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://x7rnalantd6x"]
+[gd_scene load_steps=15 format=3 uid="uid://x7rnalantd6x"]
 
 [ext_resource type="Script" path="res://scenes/game_loop/game_loop.gd" id="1_7uprm"]
 [ext_resource type="Texture2D" uid="uid://bhrywne7fw3oa" path="res://assets/map/map.png" id="2_055hg"]
 [ext_resource type="PackedScene" uid="uid://bxx3lgwby20lj" path="res://entities/object/aircraft/object_aircraft.tscn" id="2_v488n"]
-[ext_resource type="PackedScene" uid="uid://bha7l7juof6qm" path="res://entities/object/missile/object_missile.tscn" id="3_mo8pd"]
+[ext_resource type="PackedScene" uid="uid://bha7l7juof6qm" path="res://entities/object/missile/object_missile_low.tscn" id="3_mo8pd"]
 [ext_resource type="PackedScene" uid="uid://u5r87npxpnfd" path="res://ui/hud/chat/chat_line/chat_message.tscn" id="4_cxv1v"]
+[ext_resource type="PackedScene" uid="uid://hghigbjpjsaf" path="res://entities/object/missile/object_missile_high.tscn" id="4_wxgcl"]
 [ext_resource type="StyleBox" uid="uid://ct18hpkw1qno1" path="res://ui/hud/style_box_styles/sbf_background.tres" id="5_0qfsp"]
 [ext_resource type="Script" path="res://ui/hud/hud.gd" id="5_o5b6h"]
 [ext_resource type="StyleBox" uid="uid://b05i6is3bb4mh" path="res://ui/hud/style_box_styles/sbf_line_background.tres" id="6_72tsx"]
@@ -28,7 +29,8 @@ corner_radius_bottom_left = 4
 [node name="GameLoop" type="Node2D"]
 script = ExtResource("1_7uprm")
 aircraft_scene = ExtResource("2_v488n")
-missile_scene = ExtResource("3_mo8pd")
+missile_low_scene = ExtResource("3_mo8pd")
+missile_high_scene = ExtResource("4_wxgcl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(750, 225)
@@ -147,6 +149,8 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 position = Vector2(640, 360)
 type = 1
+can_change_type = true
+altitude = 0.0
 
 [node name="Camera" type="Camera2D" parent="Objects/Ship"]
 unique_name_in_owner = true
@@ -155,7 +159,7 @@ offset = Vector2(640, 360)
 zoom = Vector2(0.5, 0.5)
 
 [node name="ObjectSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://entities/object/aircraft/object_aircraft.tscn", "res://entities/object/missile/object_missile.tscn")
+_spawnable_scenes = PackedStringArray("res://entities/object/aircraft/object_aircraft.tscn", "res://entities/object/missile/object_missile_high.tscn", "res://entities/object/missile/object_missile_low.tscn")
 spawn_path = NodePath("../Objects")
 spawn_limit = 11
 
