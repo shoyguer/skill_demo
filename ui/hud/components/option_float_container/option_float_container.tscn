@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cb17up6ufs00s"]
 
-[ext_resource type="Script" path="res://ui/hud/components/option_float.gd" id="1_y7kt7"]
+[ext_resource type="Script" path="res://ui/hud/components/option_float_container/option_float_container.gd" id="1_y7kt7"]
 [ext_resource type="StyleBox" uid="uid://b05i6is3bb4mh" path="res://ui/hud/style_box_styles/sbf_line_background.tres" id="1_ybha0"]
 [ext_resource type="StyleBox" uid="uid://bvdb344x2jm5j" path="res://ui/hud/style_box_styles/sbf_red_hover.tres" id="3_yxqwh"]
 [ext_resource type="StyleBox" uid="uid://dxbjfhrk020hh" path="res://ui/hud/style_box_styles/sbf_red_pressed.tres" id="4_i3m52"]

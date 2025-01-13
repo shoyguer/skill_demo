@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://x7rnalantd6x"]
+[gd_scene load_steps=14 format=3 uid="uid://x7rnalantd6x"]
 
 [ext_resource type="Script" path="res://scenes/game_loop/game_loop.gd" id="1_7uprm"]
 [ext_resource type="Texture2D" uid="uid://bhrywne7fw3oa" path="res://assets/map/map.png" id="2_055hg"]
+[ext_resource type="PackedScene" uid="uid://bxx3lgwby20lj" path="res://entities/object/aircraft/object_aircraft.tscn" id="2_v488n"]
+[ext_resource type="PackedScene" uid="uid://bha7l7juof6qm" path="res://entities/object/missile/object_missile.tscn" id="3_mo8pd"]
 [ext_resource type="PackedScene" uid="uid://u5r87npxpnfd" path="res://ui/hud/chat/chat_line/chat_message.tscn" id="4_cxv1v"]
 [ext_resource type="StyleBox" uid="uid://ct18hpkw1qno1" path="res://ui/hud/style_box_styles/sbf_background.tres" id="5_0qfsp"]
 [ext_resource type="Script" path="res://ui/hud/hud.gd" id="5_o5b6h"]
@@ -25,6 +27,8 @@ corner_radius_bottom_left = 4
 
 [node name="GameLoop" type="Node2D"]
 script = ExtResource("1_7uprm")
+aircraft_scene = ExtResource("2_v488n")
+missile_scene = ExtResource("3_mo8pd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(750, 225)
@@ -108,17 +112,52 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_ryint")
 theme_override_styles/normal = SubResource("StyleBoxFlat_55odj")
 text = "Send"
 
+[node name="ScoreContainer" type="MarginContainer" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/ScoreContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LabelScore" type="Label" parent="HUD/Control/ScoreContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "SCORE:"
+horizontal_alignment = 1
+
+[node name="LabelPoints" type="Label" parent="HUD/Control/ScoreContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "00"
+horizontal_alignment = 1
+
 [node name="Objects" type="Node2D" parent="."]
 unique_name_in_owner = true
 
 [node name="Ship" parent="Objects" instance=ExtResource("7_x3ogf")]
 unique_name_in_owner = true
 position = Vector2(640, 360)
-ntds_unknown_texture = null
-is_unknown = false
+type = 1
 
 [node name="Camera" type="Camera2D" parent="Objects/Ship"]
 unique_name_in_owner = true
 position = Vector2(-640, -360)
 offset = Vector2(640, 360)
 zoom = Vector2(0.5, 0.5)
+
+[node name="ObjectSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://entities/object/aircraft/object_aircraft.tscn", "res://entities/object/missile/object_missile.tscn")
+spawn_path = NodePath("../Objects")
+spawn_limit = 11
+
+[connection signal="despawned" from="ObjectSpawner" to="." method="_on_object_spawner_despawned"]
+[connection signal="spawned" from="ObjectSpawner" to="." method="_on_object_spawner_spawned"]

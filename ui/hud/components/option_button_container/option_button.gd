@@ -31,3 +31,4 @@ func _ready() -> void:
 ## When the button is pressed, [signal button_pressed] will be emitted.
 func _on_button_pressed() -> void:
 	button_pressed.emit()
+	button.disabled = true

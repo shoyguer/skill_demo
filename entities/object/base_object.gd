@@ -4,7 +4,24 @@ extends StaticBody2D
 
 
 #region Variable Declaration
+signal object_updated(object: BaseObject)
+signal object_destroyed(object: BaseObject)
+
+enum Type {
+	UNIDENTIFIED,
+	FRIEND,
+	HOSTILE
+}
+
 @export_group("Object Properties")
+@export var tag: String = "NOTAG":
+	set(value):
+		tag = value
+		
+		if label_tag is Label:
+			label_tag.text = tag
+	get:
+		return tag
 ## The Object's "health"
 @export var max_hit_points: int = 10
 @export var current_hit_points: int = max_hit_points:
@@ -19,84 +36,93 @@ extends StaticBody2D
 ## How fast is this object, while moving.
 @export var object_speed: float = 1.0
 ## If this object can be hovered over, and interacted with (adding tags).
-@export var can_be_interacted: bool = false:
-	set(value):
-		can_be_interacted = value
-		
-		# If can_be_interacted == false, then the hud will NEVER show.
-		if (
-			hud is Control
-			and not can_be_interacted
-		):
-			hud.hide()
-		
-		else:
-			# calls show_hud to make sure hud is showing IF show_hud is true.
-			show_hud = show_hud
-		
-	get:
-		return can_be_interacted
+@export var can_be_interacted: bool = false
 @export var show_hud: bool = false:
 	set(value):
 		show_hud = value
 		
 		if (
 			hud is Control
-			and can_be_interacted
 			and show_hud
 		):
 			hud.show()
 		
 		if (
 			hud is Control
-			and can_be_interacted
 			and not show_hud
 		):
 			hud.hide()
 	get:
 		return show_hud
+@export var type: Type = Type.UNIDENTIFIED:
+	set(value):
+		type = value
+		
+		# Matches the type to show the correct ntds texture.
+		if not is_server_side:
+			
+			_hide_ntds()
+			
+			match type:
+				Type.UNIDENTIFIED:
+					ntds_unidentified.show()
+				Type.FRIEND:
+					ntds_friend.show()
+				Type.HOSTILE:
+					ntds_hostile.show()
+	get:
+		return type
+@export var can_change_type: bool = true
 
 ## The elevation of the object
 @export var elevation: float = 0
 
 @export_group("Visual")
 @export_subgroup("NTDS")
-@export var ntds_texture: Texture:
+@export var ntds_friend_texture: Texture:
 	set(value):
-		ntds_texture = value
+		ntds_friend_texture = value
 		
-		if (
-			not is_server_side
-			and ntds is Sprite2D
-		):
-			ntds.texture = ntds_texture
-			ntds.scale = ntds_scale
+		if ntds_friend is Sprite2D:
+			ntds_friend.texture = ntds_friend_texture
+			ntds_friend.scale = ntds_scale
 		
 	get:
-		return ntds_texture
-@export var ntds_unknown_texture: Texture:
+		return ntds_friend_texture
+@export var ntds_unidentified_texture: Texture:
 	set(value):
-		ntds_unknown_texture = value
+		ntds_unidentified_texture = value
 		
-		if (
-			not is_server_side
-			and ntds is Sprite2D
-		):
-			ntds.texture = ntds_unknown_texture
-			ntds.scale = ntds_scale
+		if ntds_unidentified is Sprite2D:
+			ntds_unidentified.texture = ntds_unidentified_texture
+			ntds_unidentified.scale = ntds_scale
 		
 	get:
-		return ntds_unknown_texture
+		return ntds_unidentified_texture
+@export var ntds_hostile_texture: Texture: 
+	set(value):
+		ntds_hostile_texture = value
+		
+		if ntds_hostile is Sprite2D:
+			ntds_hostile.texture = ntds_hostile_texture
+			ntds_hostile.scale = ntds_scale
+		
+	get:
+		return ntds_hostile_texture
+
 @export var ntds_position: Vector2 = Vector2.ZERO:
 	set(value):
 		ntds_position = value
 		
 		if (
 			not is_server_side
-			and ntds is Sprite2D
+			and ntds_friend is Sprite2D
+			and ntds_unidentified is Sprite2D
+			and ntds_hostile is Sprite2D
 		):
-			ntds.offset = ntds_position
-			ntds_unknown.offset = ntds_position
+			ntds_friend.offset = ntds_position
+			ntds_hostile.offset = ntds_position
+			ntds_unidentified.offset = ntds_position
 		
 	get:
 		return ntds_position
@@ -106,36 +132,16 @@ extends StaticBody2D
 		
 		if (
 			not is_server_side
-			and ntds is Sprite2D
+			and ntds_friend is Sprite2D
+			and ntds_hostile is Sprite2D
+			and ntds_unidentified is Sprite2D
 		):
-			ntds.scale = ntds_scale
-			ntds_unknown.scale = ntds_scale
+			ntds_friend.scale = ntds_scale
+			ntds_hostile.scale = ntds_scale
+			ntds_unidentified.scale = ntds_scale
 		
 	get:
 		return ntds_scale
-@export var is_unknown: bool = true:
-	set(value):
-		is_unknown = value
-		
-		if ntds_unknown is Sprite2D:
-			ntds_unknown.texture = ntds_unknown_texture
-		
-			if (
-				is_unknown
-				and not is_server_side
-			):
-				ntds_unknown.show()
-				ntds.hide()
-			
-			if (
-				not is_unknown
-				and not is_server_side
-			):
-				ntds.show()
-				ntds_unknown.hide()
-		
-	get:
-		return is_unknown
 
 @export_subgroup("Server")
 @export var server_texture: Texture:
@@ -172,21 +178,16 @@ extends StaticBody2D
 			and sprite is Sprite2D
 		):
 			sprite.show()
-			ntds.hide()
-			ntds_unknown.hide()
+			_hide_ntds()
 		
 		if (
 			not is_server_side
 			and sprite is Sprite2D
 		):
 			sprite.hide()
-			
-			# If is_unknown, will show the unknown texture
-			if is_unknown:
-				ntds_unknown.show()
-			# If not is_unknown, will show the regular ntds texture.
-			else:
-				ntds.show()
+			# Because inside the set of the type, is a match for showing the correct
+			# ntds sprite.
+			type = type
 		
 	get:
 		return is_server_side
@@ -210,27 +211,43 @@ extends StaticBody2D
 	get:
 		return area_collision_shape_size
 
+var ntds_array: Array[Sprite2D] = []
+
 #region Onready vars
 @onready var collision: CollisionShape2D = $Collision
 @onready var area_collision: CollisionShape2D = %AreaCollision
 @onready var sprite: Sprite2D = $Sprite
-@onready var ntds: Sprite2D = $NTDS
-@onready var ntds_unknown: Sprite2D = $NTDSUnknown
 @onready var label_hp: Label = %LabelHP
 @onready var label_tag: Label = %LabelTag
 @onready var hud: Control = %HUD
+
+# NTDS sprites
+@onready var ntds_friend: Sprite2D = $NTDSFriend
+@onready var ntds_hostile: Sprite2D = $NTDSHostile
+@onready var ntds_unidentified: Sprite2D = $NTDSUnidentified
 #endregion
 #endregion
 
 
 func _ready() -> void:
+	tag = tag
+	
 	can_be_interacted = can_be_interacted
 	show_hud = show_hud
 	
+	# Needs to be set before the textures and type, so they can be utilized in the
+	# "set" for the variable.
+	ntds_array = [ntds_friend, ntds_hostile, ntds_unidentified]
+	
 	# NTDS variables
-	ntds_texture = ntds_texture
+	ntds_friend_texture = ntds_friend_texture
+	ntds_hostile_texture = ntds_hostile_texture
+	ntds_unidentified_texture = ntds_unidentified_texture
+	
 	ntds_position = ntds_position
 	ntds_scale = ntds_scale
+	
+	type = type
 	
 	# Server variables
 	server_texture = server_texture
@@ -242,6 +259,11 @@ func _ready() -> void:
 	area_collision_shape_size = area_collision_shape_size
 
 
+func _hide_ntds() -> void:
+	for ntds: Sprite2D in ntds_array:
+		ntds.hide()
+
+
 func _on_mouse_entered() -> void:
 	if can_be_interacted:
 		show_hud = true
@@ -250,3 +272,38 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	if can_be_interacted:
 		show_hud = false
+
+
+func object_update_server() -> void:
+	var data: Dictionary = {
+		"tag": tag,
+		"type": type,
+		"current_hit_points": current_hit_points
+	}
+	
+	rpc_id(1, "_update_server", data)
+
+
+func get_hit(damage: int) -> void:
+	if is_server_side:
+		var health_damage: int = int(damage * Global.damage_multiplier)
+		current_hit_points -= health_damage
+	
+	if current_hit_points <= 0:
+		object_destroyed.emit(self)
+	
+	label_hp.text = str(current_hit_points)
+
+
+@rpc("any_peer", "call_remote")
+func _update_server(data: Dictionary) -> void:
+	tag = data.tag
+	type = data.type
+	current_hit_points = data.current_hit_points
+	
+	rpc("_update_object")
+
+
+@rpc("authority", "call_remote")
+func _update_object() -> void:
+	object_updated.emit(self)

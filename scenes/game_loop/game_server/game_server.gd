@@ -9,7 +9,6 @@ extends GameLoop
 
 @export_group("Server Settings")
 @export var enemy_number: int = 10
-@export var aircraft_scene: PackedScene
 @export var aircraft_spawn_offset: float = 200.0
 @export var aircraft_elevation_range: Vector2 = Vector2(1000, 5000)
 
@@ -34,7 +33,6 @@ extends GameLoop
 
 
 func _ready() -> void:
-	randomize()
 	is_server_side = true
 	super()
 	
@@ -60,7 +58,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _damage_multiplier_changed(value: float) -> void:
-	damage_multiplier = value
+	Global.rpc("update_damage_multiplier", value)
 
 
 func _change_object_view(value: bool) -> void:
@@ -72,7 +70,9 @@ func _change_object_view(value: bool) -> void:
 func _spawn_enemies() -> void:
 	for number: int in enemy_number:
 		var aircraft: ObjectAircraft = aircraft_scene.instantiate()
-		objects.add_child(aircraft)
+		
+		aircraft.name = "Aircraft" + str(number)
+		objects.add_child(aircraft, true)
 		
 		# Randomizing x and y for aircraft position
 		var x_position: float = randf_range(-aircraft_spawn_offset, aircraft_spawn_offset)
@@ -91,11 +91,8 @@ func _spawn_enemies() -> void:
 			aircraft_elevation_range.x, aircraft_elevation_range.y)
 		
 		aircraft.elevation = aircraft_elevation
+		aircraft.type = BaseObject.Type.UNIDENTIFIED
 		
 		aircraft.is_server_side = is_server_view
-
-
-@rpc("authority", "call_remote")
-func _spawn_aicraft_client() -> void:
-	var aircraft: ObjectAircraft = aircraft_scene.instantiate()
-	objects.add_child(aircraft)
+		
+		aircraft.object_destroyed.connect(_object_destroyed)

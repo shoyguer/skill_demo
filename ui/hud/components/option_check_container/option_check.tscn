@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cm7skdt86usyd"]
 
 [ext_resource type="StyleBox" uid="uid://b05i6is3bb4mh" path="res://ui/hud/style_box_styles/sbf_line_background.tres" id="1_r5bdg"]
-[ext_resource type="Script" path="res://ui/hud/components/option_check.gd" id="1_y0huk"]
+[ext_resource type="Script" path="res://ui/hud/components/option_check_container/option_check.gd" id="1_y0huk"]
 
 [node name="OptionCheck" type="HBoxContainer"]
 script = ExtResource("1_y0huk")

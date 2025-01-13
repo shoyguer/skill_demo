@@ -21,7 +21,7 @@ signal float_changed(value: float)
 @export var line_value: float = 1.0:
 	set(value):
 		line_value = value
-		line_value = clampf(line_value, 0.1, 2.5)
+		line_value = clampf(line_value, 1, 10)
 		
 		if line is LineEdit:
 			line.text = str(line_value)
@@ -42,8 +42,8 @@ func _ready() -> void:
 
 
 func _on_subtract_pressed() -> void:
-	line_value -= 0.1
+	line_value -= 1
 
 
 func _on_add_pressed() -> void:
-	line_value += 0.1
+	line_value += 1

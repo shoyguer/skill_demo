@@ -1,18 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfulol8recvsv"]
+[gd_scene load_steps=8 format=3 uid="uid://dfulol8recvsv"]
 
 [ext_resource type="PackedScene" uid="uid://x7rnalantd6x" path="res://scenes/game_loop/game_loop.tscn" id="1_sv18k"]
 [ext_resource type="Script" path="res://scenes/game_loop/game_server/game_server.gd" id="2_7bh5g"]
 [ext_resource type="PackedScene" uid="uid://dwdnt4awq07u0" path="res://ui/hud/player_list/player_list.tscn" id="3_hdbng"]
-[ext_resource type="PackedScene" uid="uid://bxx3lgwby20lj" path="res://entities/object/aircraft/object_aircraft.tscn" id="3_lw8kg"]
-[ext_resource type="PackedScene" uid="uid://cb17up6ufs00s" path="res://ui/hud/components/option_float.tscn" id="4_01cqy"]
+[ext_resource type="PackedScene" uid="uid://cb17up6ufs00s" path="res://ui/hud/components/option_float_container/option_float_container.tscn" id="4_01cqy"]
 [ext_resource type="StyleBox" uid="uid://ct18hpkw1qno1" path="res://ui/hud/style_box_styles/sbf_background.tres" id="4_op5cl"]
-[ext_resource type="PackedScene" uid="uid://cm7skdt86usyd" path="res://ui/hud/components/option_check.tscn" id="5_km1g4"]
-[ext_resource type="PackedScene" uid="uid://cuuqoh4fpck2i" path="res://ui/hud/components/option_button.tscn" id="6_8jeu1"]
+[ext_resource type="PackedScene" uid="uid://cm7skdt86usyd" path="res://ui/hud/components/option_check_container/option_check.tscn" id="5_km1g4"]
+[ext_resource type="PackedScene" uid="uid://cuuqoh4fpck2i" path="res://ui/hud/components/option_button_container/option_button.tscn" id="6_8jeu1"]
 
 [node name="GameLoop" instance=ExtResource("1_sv18k")]
 script = ExtResource("2_7bh5g")
 enemy_number = 10
-aircraft_scene = ExtResource("3_lw8kg")
 aircraft_spawn_offset = 650.0
 aircraft_elevation_range = Vector2(1000, 5000)
 is_server_view = true
@@ -74,3 +72,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_styles/panel = ExtResource("4_op5cl")
+
+[node name="Ship" parent="Objects" index="0"]
+can_change_type = true

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cuuqoh4fpck2i"]
 
 [ext_resource type="StyleBox" uid="uid://bvdb344x2jm5j" path="res://ui/hud/style_box_styles/sbf_red_hover.tres" id="1_4nro4"]
-[ext_resource type="Script" path="res://ui/hud/components/option_button.gd" id="1_lp3kb"]
+[ext_resource type="Script" path="res://ui/hud/components/option_button_container/option_button.gd" id="1_lp3kb"]
 [ext_resource type="StyleBox" uid="uid://dxbjfhrk020hh" path="res://ui/hud/style_box_styles/sbf_red_pressed.tres" id="2_4ew5f"]
 [ext_resource type="StyleBox" uid="uid://b8tctug3fvvlt" path="res://ui/hud/style_box_styles/sbf_red_normal.tres" id="3_shkiy"]
 
@@ -16,7 +16,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 14
-text = "Spawn Enemies"
+text = "Label"
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="."]

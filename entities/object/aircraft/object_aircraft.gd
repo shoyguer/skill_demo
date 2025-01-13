@@ -13,13 +13,15 @@ var can_travel: bool = false
 
 
 func _physics_process(delta: float) -> void:
-	if can_travel:
+	if can_travel and multiplayer.is_server():
 		global_position = global_position.move_toward(destination, object_speed * delta)
 		
 		var distance: float = global_position.distance_to(destination)
 		if distance <= MIN_DESTINATION_DISTANCE:
 			can_travel = false
-			generate_destination()
+			
+			if is_server_side:
+				generate_destination()
 
 
 func init(ship: ObjectShip, offset: float) -> void:

@@ -1,27 +1,97 @@
-[gd_scene load_steps=4 format=3 uid="uid://b18oeadmxwmsx"]
+[gd_scene load_steps=9 format=3 uid="uid://b18oeadmxwmsx"]
 
 [ext_resource type="PackedScene" uid="uid://x7rnalantd6x" path="res://scenes/game_loop/game_loop.tscn" id="1_sdscj"]
 [ext_resource type="Script" path="res://scenes/game_loop/game_recon/game_recon.gd" id="2_cssn6"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_siqi3"]
-bg_color = Color(0, 0, 0, 0.533333)
+[ext_resource type="StyleBox" uid="uid://ct18hpkw1qno1" path="res://ui/hud/style_box_styles/sbf_background.tres" id="3_1m5xt"]
+[ext_resource type="StyleBox" uid="uid://dfwsvn0icxlga" path="res://ui/hud/style_box_styles/sbf_green_hover.tres" id="7_5mm2s"]
+[ext_resource type="PackedScene" uid="uid://ctljh81leg5g3" path="res://ui/hud/components/option_string_container/option_string_container.tscn" id="7_7mbg2"]
+[ext_resource type="StyleBox" uid="uid://ds8wvvvp3lcb4" path="res://ui/hud/style_box_styles/sbf_green_pressed.tres" id="8_4w620"]
+[ext_resource type="PackedScene" uid="uid://c0u65cfsdgsvw" path="res://ui/hud/components/option_enum_container/option_enum_container.tscn" id="8_eyim6"]
+[ext_resource type="StyleBox" uid="uid://c013wo0nsosjk" path="res://ui/hud/style_box_styles/sbf_green_normal.tres" id="9_ewf7j"]
 
 [node name="GameLoop" instance=ExtResource("1_sdscj")]
 script = ExtResource("2_cssn6")
 
-[node name="PanelContainer" type="PanelContainer" parent="HUD/Control/MarginContainer" index="0"]
+[node name="PanelContainer" type="PanelContainer" parent="HUD/Control/MarginContainer" index="1"]
+custom_minimum_size = Vector2(448, 200)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_siqi3")
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/panel = ExtResource("3_1m5xt")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/MarginContainer/PanelContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/MarginContainer/PanelContainer" index="0"]
 layout_mode = 2
-alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/MarginContainer/PanelContainer/HBoxContainer" index="0"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="HUD/Control/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer" index="0"]
+[node name="Recon" type="Label" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer" index="0"]
 layout_mode = 2
 text = "Recon"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer" index="1"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer" index="2"]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer" index="0"]
+layout_mode = 2
+alignment = 1
+
+[node name="ButtonBack" type="Button" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/Buttons" index="0"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+theme_override_styles/hover = ExtResource("7_5mm2s")
+theme_override_styles/pressed = ExtResource("8_4w620")
+theme_override_styles/normal = ExtResource("9_ewf7j")
+text = "<"
+
+[node name="ButtonNext" type="Button" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/Buttons" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+theme_override_styles/hover = ExtResource("7_5mm2s")
+theme_override_styles/pressed = ExtResource("8_4w620")
+theme_override_styles/normal = ExtResource("9_ewf7j")
+text = ">"
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer" index="1"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="ObjectDataContainer" type="VBoxContainer" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer" index="2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="OptionLabelContainer" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer" index="0" instance=ExtResource("7_7mbg2")]
+unique_name_in_owner = true
+layout_mode = 2
+label_title = "Tag"
+line_value = "UNIDENTIFIED"
+
+[node name="OptionEnumContainer" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer" index="1" instance=ExtResource("8_eyim6")]
+unique_name_in_owner = true
+layout_mode = 2
+label_title = "Type"
+
+[node name="MarginContainer2" type="MarginContainer" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer" index="2"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="ButtonSave" type="Button" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer" index="3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "SAVE DATA"
+
+[node name="LabelNoFound" type="Label" parent="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer" index="3"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "No Enemy Found"
+horizontal_alignment = 1
+
+[node name="Ship" parent="Objects" index="0"]
+can_change_type = true
+
+[connection signal="pressed" from="HUD/Control/MarginContainer/PanelContainer/VBoxContainer/VBoxContainer/ObjectDataContainer/ButtonSave" to="." method="_on_button_save_pressed"]

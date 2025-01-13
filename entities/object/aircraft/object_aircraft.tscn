@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxx3lgwby20lj"]
+[gd_scene load_steps=10 format=3 uid="uid://bxx3lgwby20lj"]
 
 [ext_resource type="PackedScene" uid="uid://hproyofcdlyw" path="res://entities/object/base_object.tscn" id="1_sm3pg"]
 [ext_resource type="Script" path="res://entities/object/aircraft/object_aircraft.gd" id="2_mlbg1"]
 [ext_resource type="Texture2D" uid="uid://c87el6w2fonr8" path="res://assets/ntds_symbols/hostle_air.png" id="3_762bw"]
 [ext_resource type="Texture2D" uid="uid://cor8q1jqr2pcv" path="res://assets/server_side/planes/kisspng-airplane-sprite-aircraft-deviantart-fighter-5abca336e20536.2257652815223119909258.png" id="3_lldfe"]
+[ext_resource type="Texture2D" uid="uid://gn0scpqvc0r5" path="res://assets/ntds_symbols/friend_air.png" id="3_rgh7e"]
 [ext_resource type="Texture2D" uid="uid://qa1aqbcl7t6y" path="res://assets/ntds_symbols/unk_air.png" id="5_u78hq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sk1q6"]
@@ -20,15 +21,27 @@ properties/1/replication_mode = 2
 properties/2/path = NodePath(".:can_travel")
 properties/2/spawn = false
 properties/2/replication_mode = 2
-properties/3/path = NodePath(".:hit_points")
-properties/3/spawn = false
-properties/3/replication_mode = 2
-properties/4/path = NodePath(".:object_speed")
-properties/4/spawn = false
+properties/3/path = NodePath(".:object_speed")
+properties/3/spawn = true
+properties/3/replication_mode = 0
+properties/4/path = NodePath(".:elevation")
+properties/4/spawn = true
 properties/4/replication_mode = 2
-properties/5/path = NodePath(".:elevation")
-properties/5/spawn = false
-properties/5/replication_mode = 2
+properties/5/path = NodePath(".:max_hit_points")
+properties/5/spawn = true
+properties/5/replication_mode = 0
+properties/6/path = NodePath(".:current_hit_points")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+properties/7/path = NodePath(".:type")
+properties/7/spawn = true
+properties/7/replication_mode = 2
+properties/8/path = NodePath(".:tag")
+properties/8/spawn = true
+properties/8/replication_mode = 2
+properties/9/path = NodePath("HUD/LabelHP:text")
+properties/9/spawn = true
+properties/9/replication_mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h4gwi"]
 resource_local_to_scene = true
@@ -38,7 +51,10 @@ size = Vector2(32, 32)
 script = ExtResource("2_mlbg1")
 object_speed = 5.0
 can_be_interacted = true
-ntds_texture = ExtResource("3_762bw")
+can_change_type = true
+ntds_friend_texture = ExtResource("3_rgh7e")
+ntds_unidentified_texture = ExtResource("5_u78hq")
+ntds_hostile_texture = ExtResource("3_762bw")
 ntds_position = Vector2(0, 12)
 server_texture = ExtResource("3_lldfe")
 server_scale = Vector2(0.05, 0.05)
@@ -53,18 +69,20 @@ scale = Vector2(0.05, 0.05)
 texture = ExtResource("3_lldfe")
 offset = Vector2(0, 12)
 
-[node name="NTDS" parent="." index="2"]
-scale = Vector2(1, 1)
-texture = ExtResource("3_762bw")
+[node name="NTDSFriend" parent="." index="2"]
+texture = ExtResource("3_rgh7e")
 offset = Vector2(0, 12)
 
-[node name="NTDSUnknown" parent="." index="3"]
-scale = Vector2(1, 1)
-texture = ExtResource("5_u78hq")
+[node name="NTDSHostile" parent="." index="3"]
+texture = ExtResource("3_762bw")
 offset = Vector2(0, 12)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="4"]
 replication_config = SubResource("SceneReplicationConfig_equq5")
+
+[node name="NTDSUnidentified" parent="." index="5"]
+texture = ExtResource("5_u78hq")
+offset = Vector2(0, 12)
 
 [node name="AreaCollision" parent="Area2D" index="0"]
 shape = SubResource("RectangleShape2D_h4gwi")
