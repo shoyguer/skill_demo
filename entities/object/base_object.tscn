@@ -1,0 +1,97 @@
+[gd_scene load_steps=6 format=3 uid="uid://hproyofcdlyw"]
+
+[ext_resource type="Script" path="res://entities/object/base_object.gd" id="1_wxilh"]
+[ext_resource type="Texture2D" uid="uid://cht5d2xgl8fd8" path="res://assets/server_side/player_ship/ship.png" id="2_v3rld"]
+[ext_resource type="PackedScene" uid="uid://1ooprk5eldsm" path="res://entities/object/trail/trail_instance.tscn" id="3_tlxpe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0r2g"]
+resource_local_to_scene = true
+size = Vector2(16, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yojx8"]
+resource_local_to_scene = true
+size = Vector2(24, 64)
+
+[node name="BaseObject" type="StaticBody2D"]
+script = ExtResource("1_wxilh")
+current_hit_points = 10
+server_texture = ExtResource("2_v3rld")
+server_scale = Vector2(0.33, 0.33)
+collision_shape_size = Vector2(16, 60)
+area_collision_shape_size = Vector2(24, 64)
+trail_scene = ExtResource("3_tlxpe")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_g0r2g")
+disabled = true
+debug_color = Color(0, 0.595, 0.7, 0)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("2_v3rld")
+
+[node name="NTDSFriend" type="Sprite2D" parent="."]
+visible = false
+
+[node name="NTDSHostile" type="Sprite2D" parent="."]
+visible = false
+
+[node name="NTDSUnidentified" type="Sprite2D" parent="."]
+visible = false
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AreaCollision" type="CollisionShape2D" parent="Area2D"]
+unique_name_in_owner = true
+visible = false
+shape = SubResource("RectangleShape2D_yojx8")
+
+[node name="HUD" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="LabelHP" type="Label" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 30.0
+offset_right = 40.0
+offset_bottom = 53.0
+pivot_offset = Vector2(0, 23)
+text = "10"
+
+[node name="LabelAltitude" type="Label" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 15.0
+offset_top = -12.0
+offset_right = 55.0
+offset_bottom = 11.0
+pivot_offset = Vector2(0, 23)
+text = "ALT: 0"
+
+[node name="LabelTag" type="Label" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = -54.0
+offset_right = 57.0
+offset_bottom = -31.0
+pivot_offset = Vector2(0, 23)
+theme_override_colors/font_color = Color(0.89, 0.867453, 0.2136, 1)
+text = "NOTAG"
+
+[node name="TrailContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="TimerTrail" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_mouse_exited"]
+[connection signal="timeout" from="TimerTrail" to="." method="_on_timer_trail_timeout"]

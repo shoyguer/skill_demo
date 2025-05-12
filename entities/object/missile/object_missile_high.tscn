@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://hghigbjpjsaf"]
+
+[ext_resource type="PackedScene" uid="uid://hproyofcdlyw" path="res://entities/object/base_object.tscn" id="1_dj3jd"]
+[ext_resource type="Script" path="res://entities/object/missile/object_missile.gd" id="2_j54v1"]
+[ext_resource type="Texture2D" uid="uid://cntn70v4d2d37" path="res://assets/ntds_symbols/ownship_missile.png" id="3_3d5ek"]
+[ext_resource type="Texture2D" uid="uid://bi6palbkbh11d" path="res://assets/server_side/missile_1/Missile_1_Flying_000.png" id="4_l3bb0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hj74f"]
+resource_local_to_scene = true
+size = Vector2(58, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jas80"]
+resource_local_to_scene = true
+size = Vector2(64, 24)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nuo2o"]
+properties/0/path = NodePath(".:tag")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:object_speed")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:type")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:position")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:altitude")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:leaves_trail")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:trail_create_time")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+
+[node name="BaseObject" instance=ExtResource("1_dj3jd")]
+script = ExtResource("2_j54v1")
+tag = "MISSILE"
+max_hit_points = 1
+current_hit_points = 1
+damage_points = 1
+object_speed = 20.0
+can_be_interacted = true
+type = 1
+can_change_type = false
+ntds_friend_texture = ExtResource("3_3d5ek")
+server_texture = ExtResource("4_l3bb0")
+server_scale = Vector2(0.1, 0.1)
+collision_shape_size = Vector2(58, 20)
+area_collision_shape_size = Vector2(64, 24)
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource("RectangleShape2D_hj74f")
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_l3bb0")
+
+[node name="NTDSFriend" parent="." index="2"]
+texture = ExtResource("3_3d5ek")
+
+[node name="AreaCollision" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_jas80")
+
+[node name="LabelTag" parent="HUD" index="2"]
+text = "MISSILE"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="7"]
+replication_config = SubResource("SceneReplicationConfig_nuo2o")
+
+[node name="TrailContainer" parent="." index="8"]
+visible = false
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_area_entered"]

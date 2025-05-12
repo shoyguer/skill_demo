@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctljh81leg5g3"]
+
+[ext_resource type="Script" path="res://ui/hud/components/option_string_container/option_string_container.gd" id="1_egxq0"]
+[ext_resource type="StyleBox" uid="uid://b05i6is3bb4mh" path="res://ui/hud/style_box_styles/sbf_line_background.tres" id="2_nkdh4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ipqi"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.233925, 0.233925, 0.233925, 0.360784)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="OptionStringContainer" type="HBoxContainer"]
+script = ExtResource("1_egxq0")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 14
+text = "Label"
+vertical_alignment = 1
+
+[node name="Line" type="LineEdit" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_filter = 1
+theme_override_colors/font_uneditable_color = Color(1, 1, 1, 1)
+theme_override_styles/read_only = SubResource("StyleBoxFlat_4ipqi")
+theme_override_styles/normal = ExtResource("2_nkdh4")
+text = "NOTAG"
+max_length = 16
+virtual_keyboard_enabled = false
+caret_column = 5
+
+[connection signal="text_changed" from="Line" to="." method="_on_line_text_changed"]

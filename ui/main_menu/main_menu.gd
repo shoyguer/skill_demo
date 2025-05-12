@@ -32,6 +32,8 @@ var current_container: VBoxContainer = null
 @onready var button_send: Button = %ButtonSend
 # Game data
 @onready var game_version_label: Label = %GameVersionLabel
+
+@onready var popup: AcceptDialog = %Popup
 #endregion
 
 
@@ -53,6 +55,8 @@ func _ready() -> void:
 	# Connects all the multi_player_container buttons button_got_pressed signals.
 	for button: UIButton in multi_player_buttons.get_children():
 		button.button_got_pressed.connect(_menu_button_pressed)
+	
+	Events.warned_server_full.connect(_server_is_full_warning)
 	#endregion
 	
 	#region Set Game Version
@@ -89,7 +93,6 @@ func _menu_button_pressed(button: UIButton) -> void:
 		
 		button.ButtonType.JOIN_SERVER:
 			MultiplayerManager.join_game()
-			SceneLoader.load_scene(button.scene_path_to_load)
 		
 		_:
 			if button.scene_path_to_load != "":
@@ -152,3 +155,8 @@ func _on_username_send_pressed() -> void:
 	else:
 		button_host_server.disabled = true
 		button_join_server.disabled = true
+
+
+## If the server is full, this warning will appear.
+func _server_is_full_warning() -> void:
+	popup.show()

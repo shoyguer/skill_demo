@@ -1,4 +1,5 @@
 extends Control
+## Is responsible for loading new scenes, showing a loading bar to the user.
 
 
 var progress: Array = []
@@ -31,6 +32,13 @@ func _process(_delta: float) -> void:
 			
 			hide()
 			get_tree().change_scene_to_packed(new_scene)
+
+
+## When needed, the server can request for one of the peers connected to the server
+## to load a specific scene.
+@rpc("authority", "call_remote")
+func remote_load_scene(new_scene_path: String) -> void:
+	load_scene(new_scene_path)
 
 
 ## Loads a new scene, according to the scene path, set by the [param new_game_scene].

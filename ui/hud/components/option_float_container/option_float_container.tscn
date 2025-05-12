@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://cb17up6ufs00s"]
+
+[ext_resource type="Script" path="res://ui/hud/components/option_float_container/option_float_container.gd" id="1_y7kt7"]
+[ext_resource type="StyleBox" uid="uid://b05i6is3bb4mh" path="res://ui/hud/style_box_styles/sbf_line_background.tres" id="1_ybha0"]
+[ext_resource type="StyleBox" uid="uid://bvdb344x2jm5j" path="res://ui/hud/style_box_styles/sbf_red_hover.tres" id="3_yxqwh"]
+[ext_resource type="StyleBox" uid="uid://dxbjfhrk020hh" path="res://ui/hud/style_box_styles/sbf_red_pressed.tres" id="4_i3m52"]
+[ext_resource type="StyleBox" uid="uid://b8tctug3fvvlt" path="res://ui/hud/style_box_styles/sbf_red_normal.tres" id="5_kxr1s"]
+[ext_resource type="StyleBox" uid="uid://dfwsvn0icxlga" path="res://ui/hud/style_box_styles/sbf_green_hover.tres" id="6_ub76l"]
+[ext_resource type="StyleBox" uid="uid://ds8wvvvp3lcb4" path="res://ui/hud/style_box_styles/sbf_green_pressed.tres" id="7_jd8kw"]
+[ext_resource type="StyleBox" uid="uid://c013wo0nsosjk" path="res://ui/hud/style_box_styles/sbf_green_normal.tres" id="8_2quur"]
+
+[node name="OptionFloat" type="HBoxContainer"]
+script = ExtResource("1_y7kt7")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 14
+text = "Label"
+vertical_alignment = 1
+
+[node name="Line" type="LineEdit" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+mouse_filter = 1
+theme_override_colors/font_uneditable_color = Color(1, 1, 1, 1)
+theme_override_styles/read_only = ExtResource("1_ybha0")
+theme_override_styles/normal = ExtResource("1_ybha0")
+text = "1"
+max_length = 4
+editable = false
+virtual_keyboard_type = 3
+selecting_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 0
+
+[node name="Subtract" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+theme_override_styles/hover = ExtResource("3_yxqwh")
+theme_override_styles/pressed = ExtResource("4_i3m52")
+theme_override_styles/normal = ExtResource("5_kxr1s")
+text = "<"
+
+[node name="Add" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+theme_override_styles/hover = ExtResource("6_ub76l")
+theme_override_styles/pressed = ExtResource("7_jd8kw")
+theme_override_styles/normal = ExtResource("8_2quur")
+text = ">"
+
+[connection signal="pressed" from="HBoxContainer/Subtract" to="." method="_on_subtract_pressed"]
+[connection signal="pressed" from="HBoxContainer/Add" to="." method="_on_add_pressed"]

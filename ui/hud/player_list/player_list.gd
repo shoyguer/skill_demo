@@ -16,10 +16,17 @@ func _ready() -> void:
 
 ## When a new player is logged in, their name data will be displayed to the
 ## server owner.
-func add_to_player_list(id: int, username: String) -> void:
+func add_to_player_list(
+	id: int,
+	username: String,
+	type: MultiplayerManager.PlayerType
+) -> void:
 	var player_label: Label = player_label_scene.instantiate()
 	player_list_container.add_child(player_label)
-	player_label.text = "ID: " + str(id) + "  |  " + "Name: " + username
+	var string_type: String = MultiplayerManager.PlayerType.find_key(type)
+	string_type = string_type.to_lower()
+	string_type = string_type.capitalize()
+	player_label.text = string_type + "  |  " + "Name: " + username
 	# Sets meta data to the label, so it can be searched later on the 
 	# remove_from_player_list function.
 	player_label.set_meta("id", id)

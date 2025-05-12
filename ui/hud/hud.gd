@@ -38,7 +38,6 @@ func _send_message() -> void:
 ## Will distribute the message to all peers connected to the server.
 @rpc("any_peer", "call_local")
 func _message_distribution_server(username: String, text: String) -> void:
-	print("Got here?")
 	rpc("_message_talk", username, text)
 
 
